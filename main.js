@@ -1,31 +1,54 @@
 var level = 0;
+var round = 0;
 var page = 0;
 
 var content = [
     {
-        title: "Level One:<br><strong>Basics</strong>",
-        text: "Let's start with the basics..."
+        rounds: [
+            {
+                pages: [
+                    ""
+                ]
+            }
+        ]
     },
     {
-        text: "Big O notation is used to determine the running times of algorithms in computer science."
+        name: "Basics",
+        description: "Let's start with the basics...",
+        rounds: [
+            {
+                pages: [
+                    "Big O notation is used to determine the running times of algorithms in computer science.",
+                    "Some content for the second page"
+                ],
+            },
+            {
+                name: "Constant Runtime",
+                pages: [
+                    "An algorithm's runtime is constant if it is unaffected by changes in inputs.",
+                    "Because of this, the runtime of that algorithm could be represented as O(1)."
+                ]
+            }
+        ]
     },
     {
-        text: "Constant runtime exists when how long the algorithm takes is unaffected by the inputs."
-    },
-    {
-        text: "For example, determining whether a boolean is true or false will always take the same amount of time."
-    },
-    {
-        text: "Because of this, the runtime of that algorithm could be represented as O(1), meaning it is constant."
-    },
-    {
-        text: "If the runtime of an algorithm increased by the same amount for each increase in the number of inputs, that would be referred to as linear time."
-    },
-    {
-        text: "For example, if we were adding together a list of numbers, exactly one additional operation has to be made for each one addition to the list. This results in a linear relationship."
-    },
-    {
-        text: "Since it is linear, it increases by the same amount for each increase in n. Therefore, we can refer to this as O(n)."
+        name: "Basics 2",
+        description: "Let's start with the basics...",
+        rounds: [
+            {
+                pages: [
+                    "Level 2 round 1 page 1",
+                    "Level 2 round 1 page 2"
+                ],
+            },
+            {
+                name: "Constant Runtime 2",
+                pages: [
+                    "Level 2 round 2 page 1",
+                    "Level 2 round 2 page 2"
+                ]
+            }
+        ]
     }
 ];
 
@@ -43,6 +66,8 @@ function contractAndExpandContainer(changeContentCallback) {
 
     var newBorderRadius = newSize / 2 + "px";
     var newPadding = (newSize - originalHeight) / 2 + "px " + (newSize - originalWidth) / 2 + "px";
+
+    $("#container").removeClass("overflow");
 
     $("#container").animate({
         borderRadius: newBorderRadius,
@@ -71,23 +96,45 @@ function contractAndExpandContainer(changeContentCallback) {
     });
 }
 
-function updateContainerContent(page) {
-    $("#container .level").removeClass("hidden");
-    $("#container h1").html("title" in page ? page.title : "");
-    $("#container p").text("text" in page ? page.text : "");
+function updateContainerContent(firstLevel) {
+    if (page + 1 == content[level].rounds[round].pages.length) {
+        // Round is complete
+        page = -1;
+
+        if (round + 1 == content[level].rounds.length) {
+            // Level is complete
+            round = 0;
+            level += 1;
+
+            contractAndExpandContainer(function() {
+                if (level == 1) {
+                    $("#stage").removeClass("hidden");
+                    $("#container").addClass("lesson");
+                    $("#container a").text("Continue");
+                    $("#container .level").removeClass("hidden");
+                }
+
+                $("#container h1").html("Level One:<br><strong>" + content[level].name + "</strong>");
+                $("#container p").text(content[level].description);
+            });
+        } else {
+            // Round is complete
+            round += 1;
+
+            contractAndExpandContainer(function() {
+                $("#container h1").html("Round One:<br><strong>" + content[level].rounds[round].name + "</strong>");
+                $("#container p").text("");
+            });
+        }
+    } else {
+        // Next page
+        page += 1;
+
+        $("#container h1").text("");
+        $("#container p").text(content[level].rounds[round].pages[page]);
+    }
 }
 
 $("#begin").click(function() {
-    if (page == 0) {
-        contractAndExpandContainer(function() {
-            $("#stage").removeClass("hidden");
-            $("#container").addClass("lesson");
-            $("#container a").text("Continue");
-            updateContainerContent(content[page]);
-            page += 1;
-        });
-    } else {
-        updateContainerContent(content[page]);
-        page += 1;
-    }
+    updateContainerContent(false);
 });
