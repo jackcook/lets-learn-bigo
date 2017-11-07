@@ -1,56 +1,13 @@
+---
+# main.js
+---
+
 var level = 0;
 var round = 0;
 var page = 0;
 
-var content = [
-    {
-        rounds: [
-            {
-                pages: [
-                    ""
-                ]
-            }
-        ]
-    },
-    {
-        name: "Basics",
-        description: "Let's start with the basics...",
-        rounds: [
-            {
-                pages: [
-                    "Big O notation is used to determine the running times of algorithms in computer science.",
-                    "Some content for the second page"
-                ],
-            },
-            {
-                name: "Constant Runtime",
-                pages: [
-                    "An algorithm's runtime is constant if it is unaffected by changes in inputs.",
-                    "Because of this, the runtime of that algorithm could be represented as O(1)."
-                ]
-            }
-        ]
-    },
-    {
-        name: "Basics 2",
-        description: "Let's start with the basics...",
-        rounds: [
-            {
-                pages: [
-                    "Level 2 introduction page 1",
-                    "Level 2 introduction page 2"
-                ],
-            },
-            {
-                name: "Constant Runtime 2",
-                pages: [
-                    "Level 2 round 1 page 1",
-                    "Level 2 round 1 page 2"
-                ]
-            }
-        ]
-    }
-];
+var content = {{ site.data.levels | jsonify }};
+var numbers = ["Zero", "One", "Two", "Three", "Four", "Five"];
 
 function contractAndExpandContainer(changeContentCallback) {
     var originalHeight = parseInt($("#container").css("height"));
@@ -119,7 +76,7 @@ function updateContainerContent() {
                 $("#container .stage").text(level);
                 $(".level").text(level);
 
-                $("#container h1").html("Level One:<br><strong>" + content[level].name + "</strong>");
+                $("#container h1").html("Level " + numbers[level] + ":<br><strong>" + content[level].name + "</strong>");
                 $("#container p").text(content[level].description);
 
                 $("#container h1").removeClass("hidden");
@@ -134,7 +91,7 @@ function updateContainerContent() {
                 $("#container .stage").text(round);
                 $(".round").text(round);
 
-                $("#container h1").html("Round One:<br><strong>" + content[level].rounds[round].name + "</strong>");
+                $("#container h1").html("Round " + numbers[round] + ":<br><strong>" + content[level].rounds[round].name + "</strong>");
 
                 $("#container h1").removeClass("hidden");
                 $("#container p").addClass("hidden");
