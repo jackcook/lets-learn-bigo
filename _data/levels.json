@@ -14,15 +14,36 @@
         "rounds": [
             {
                 "pages": [
-                    "Big O notation is used to determine the running times of algorithms in computer science.",
-                    "Some content for the second page"
+                    {
+                        "type": "text",
+                        "text": "Big O notation is used to determine the running times of algorithms in computer science."
+                    },
+                    {
+                        "type": "text",
+                        "text": "Some content for the second page"
+                    }
                 ],
             },
             {
                 "name": "Constant Time",
                 "pages": [
-                    "An algorithm's runtime is constant if it is unaffected by changes in inputs.",
-                    "Because of this, the runtime of that algorithm could be represented as O(1)."
+                    {
+                        "type": "text",
+                        "text": "An algorithm's runtime is constant if it is unaffected by changes in inputs."
+                    },
+                    {
+                        "type": "text",
+                        "text": "Because of this, the runtime of that algorithm could be represented as O(1)."
+                    },
+                    {
+                        "type": "question",
+                        "code": "def print_first(arr):<br>&emsp;print(arr[0])",
+                        "answer": "O(1)"
+                    },
+                    {
+                        "type": "text",
+                        "text": "Level complete!"
+                    }
                 ]
             },
             {

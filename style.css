@@ -15,7 +15,7 @@ body {
 }
 
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 #stage {
@@ -122,6 +122,78 @@ body {
 }
 
 #container.lesson .button:hover {
+    background: #3f51b5;
+}
+
+#container.question {
+    top: 35%;
+    left: 40%;
+    width: calc(448px - 32px * 2) !important;
+    height: calc(448px - 32px * 2) !important;
+    padding: 32px !important;
+}
+
+#container.question p {
+    font-size: 32px;
+}
+
+#container.question .stage, #container.question .button {
+    display: none;
+}
+
+#answer {
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: calc(192px - 16px * 2);
+    height: calc(192px - 16px * 2);
+    border-radius: calc(192px / 2);
+    padding: 16px;
+    position: absolute;
+    top: 65%;
+    left: 60%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+#answer p {
+    font-size: 16px;
+    font-weight: 900;
+    margin-left: -96px;
+    margin-bottom: 12px;
+    width: 100%;
+    text-align: right;
+}
+
+#answer input {
+    width: 80%;
+    margin-left: -96px;
+    height: 32px;
+    border: #3f51b5 2px solid;
+    border-radius: 8px;
+    background: rgba(63, 81, 181, 0.1);
+    padding: 16px;
+    line-height: 32px;
+    font-size: 32px;
+    outline: none;
+}
+
+#answer input.correct {
+    border: #2ecc71 2px solid;
+    background: rgba(46, 204, 113, 0.1);
+    color: #7f8c8d;
+}
+
+#answer .button {
+    background: rgba(63, 81, 181, 0.1);
+    top: 81%;
+    left: 81%;
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
+
+#answer .button:hover {
     background: #3f51b5;
 }
 

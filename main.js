@@ -6,7 +6,7 @@ var level = 0;
 var round = 0;
 var page = 0;
 
-var content = {{ site.data.levels | jsonify }};
+var levels = {{ site.data.levels | jsonify }};
 var numbers = ["Zero", "One", "Two", "Three", "Four", "Five"];
 
 function contractAndExpandContainer(changeContentCallback) {
@@ -54,11 +54,20 @@ function contractAndExpandContainer(changeContentCallback) {
 }
 
 function updateContainerContent() {
-    if (page + 1 == content[level].rounds[round].pages.length) {
+    var currentPage = levels[level].rounds[round].pages[page];
+
+    if (currentPage != null && currentPage.type == "question") {
+        $("#container").removeClass();
+        $("#container").addClass("lesson");
+        $("#container").addClass("overflow");
+        $("#answer").addClass("hidden");
+    }
+
+    if (page + 1 == levels[level].rounds[round].pages.length) {
         // Round is complete
         page = -1;
 
-        if (round + 1 == content[level].rounds.length) {
+        if (round + 1 == levels[level].rounds.length) {
             // Level is complete
             round = 0;
             level += 1;
@@ -76,8 +85,8 @@ function updateContainerContent() {
                 $("#container .stage").text(level);
                 $(".level").text(level);
 
-                $("#container h1").html("Level " + numbers[level] + ":<br><strong>" + content[level].name + "</strong>");
-                $("#container p").text(content[level].description);
+                $("#container h1").html("Level " + numbers[level] + ":<br><strong>" + levels[level].name + "</strong>");
+                $("#container p").text(levels[level].description);
 
                 $("#container h1").removeClass("hidden");
             });
@@ -91,7 +100,7 @@ function updateContainerContent() {
                 $("#container .stage").text(round);
                 $(".round").text(round);
 
-                $("#container h1").html("Round " + numbers[round] + ":<br><strong>" + content[level].rounds[round].name + "</strong>");
+                $("#container h1").html("Round " + numbers[round] + ":<br><strong>" + levels[level].rounds[round].name + "</strong>");
 
                 $("#container h1").removeClass("hidden");
                 $("#container p").addClass("hidden");
@@ -101,7 +110,17 @@ function updateContainerContent() {
         // Next page
         page += 1;
 
-        $("#container p").text(content[level].rounds[round].pages[page]);
+        var content = levels[level].rounds[round].pages[page];
+
+        if (content.type == "text") {
+            $("#container p").text(content.text);
+        } else if (content.type == "question") {
+            $("#container p").html(content.code);
+
+            $("#container").removeClass();
+            $("#container").addClass("question")
+            $("#answer").removeClass("hidden");
+        }
 
         $("#container h1").addClass("hidden");
         $("#container p").removeClass("hidden");
@@ -118,4 +137,23 @@ $("#stage").click(function() {
 
 $("#close-button").click(function() {
     $("#level-selector").addClass("hidden");
+});
+
+$("#answer input").keyup(function(e) {
+    // If the enter key was hit
+    if (e.keyCode == 13) {
+        var correctAnswer = levels[level].rounds[round].pages[page].answer;
+            if ($("#answer input").val() == correctAnswer) {
+            $("#answer input").addClass("correct");
+            $("#answer input").prop("disabled", true);
+            $("#answer p").text("CORRECT!");
+            $("#answer .button").removeClass("hidden");
+        } else {
+            $("#answer input").val("");
+        }
+    }
+});
+
+$("#answer .button").click(function() {
+    updateContainerContent();
 });
