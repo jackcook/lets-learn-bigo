@@ -96,7 +96,7 @@ function contractAndExpandContainer(changeContentCallback) {
     });
 }
 
-function updateContainerContent(firstLevel) {
+function updateContainerContent() {
     if (page + 1 == content[level].rounds[round].pages.length) {
         // Round is complete
         page = -1;
@@ -121,6 +121,8 @@ function updateContainerContent(firstLevel) {
 
                 $("#container h1").html("Level One:<br><strong>" + content[level].name + "</strong>");
                 $("#container p").text(content[level].description);
+
+                $("#container h1").removeClass("hidden");
             });
         } else {
             // Round is complete
@@ -133,18 +135,22 @@ function updateContainerContent(firstLevel) {
                 $(".round").text(round);
 
                 $("#container h1").html("Round One:<br><strong>" + content[level].rounds[round].name + "</strong>");
-                $("#container p").text("");
+
+                $("#container h1").removeClass("hidden");
+                $("#container p").addClass("hidden");
             });
         }
     } else {
         // Next page
         page += 1;
 
-        $("#container h1").text("");
         $("#container p").text(content[level].rounds[round].pages[page]);
+
+        $("#container h1").addClass("hidden");
+        $("#container p").removeClass("hidden");
     }
 }
 
 $("#begin").click(function() {
-    updateContainerContent(false);
+    updateContainerContent();
 });
