@@ -9,27 +9,29 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,900" rel="stylesheet" />
 </head>
 <body>
-    <div id="stage" class="hidden">
+    <div id="indicator" class="hidden">
         Level
-        <div class="level">1</div>
+        <div class="level update">1</div>
         Round
-        <div class="round">1</div>
+        <div class="round update">1</div>
     </div>
-    <div id="container">
-        <div class="stage hidden">1</div>
-        <h1>Let's Learn Big O!</h1>
-        <p>Learn to use Big O notation, a common standard throughout the tech industry.</p>
-        <a id="begin" class="button">Start</a>
+    <div id="content">
+        <div id="main" class="bubble">
+            <div class="indicator update hidden">1</div>
+            <h1>Let's Learn Big O!</h1>
+            <p>Learn to use Big O notation, a common standard throughout the tech industry.</p>
+            <a id="begin" class="button">Start</a>
+        </div>
+        <div id="answer" class="bubble">
+            <p>TIME COMPLEXITY</p>
+            <input type="text" />
+            <a class="button hidden">Next</a>
+        </div>
     </div>
-    <div id="answer" class="hidden">
-        <p>TIME COMPLEXITY</p>
-        <input type="text" />
-        <a class="button hidden">Next</a>
-    </div>
-    <div id="level-selector" class="hidden">
+    <div id="map" class="hidden">
         <a id="close-button"><img src="close.svg" /></a>
         {% for level in site.data.levels offset:1 %}
-        <div class="level-content">
+        <div class="map-level">
             <h1 class="name"><div class="level">{{ forloop.index }}</div>{{ level.name | upcase }}</h1>
             <ul>
                 {% for round in level.rounds offset:1 %}

@@ -29,11 +29,19 @@
                 "pages": [
                     {
                         "type": "text",
-                        "text": "An algorithm's runtime is constant if it is unaffected by changes in inputs."
+                        "text": "An algorithm's runtime is constant if it is unaffected by changes in any inputs."
                     },
                     {
                         "type": "text",
-                        "text": "Because of this, the runtime of that algorithm could be represented as O(1)."
+                        "text": "Constant runtime is generally represented as O(1). Keep in mind that it will always be O(1), for reasons that will be explained later."
+                    },
+                    {
+                        "type": "text",
+                        "text": "Even if one algorithm takes significantly longer than another, as long as their runtime doesn't change with changes in input, they are both O(1)."
+                    },
+                    {
+                        "type": "text",
+                        "text": "Let's try seeing if we can use this to determine the runtimes of some basic algorithms."
                     },
                     {
                         "type": "question",
@@ -41,8 +49,12 @@
                         "answer": "O(1)"
                     },
                     {
-                        "type": "text",
-                        "text": "Level complete!"
+                        "type": "question",
+                        "code": "def print_first(arr):<br>&emsp;print(arr[0] + arr[1])",
+                        "answer": "O(1)"
+                    },
+                    {
+                        "type": "recap"
                     }
                 ]
             },

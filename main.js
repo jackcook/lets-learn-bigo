@@ -10,13 +10,13 @@ var levels = {{ site.data.levels | jsonify }};
 var numbers = ["Zero", "One", "Two", "Three", "Four", "Five"];
 
 function contractAndExpandContainer(changeContentCallback) {
-    var originalHeight = parseInt($("#container").css("height"));
-    var originalWidth = parseInt($("#container").css("width"));
-    var originalLeftPadding = parseInt($("#container").css("padding-left"));
-    var originalTopMargin = parseInt($("#container").css("margin-top"));
+    var originalHeight = parseInt($("#main").css("height"));
+    var originalWidth = parseInt($("#main").css("width"));
+    var originalLeftPadding = parseInt($("#main").css("padding-left"));
+    var originalTopMargin = parseInt($("#main").css("margin-top"));
 
-    var originalBorderRadius = $("#container").css("border-radius");
-    var originalPadding = $("#container").css("padding");
+    var originalBorderRadius = $("#main").css("border-radius");
+    var originalPadding = $("#main").css("padding");
 
     var fullSize = originalWidth + 2 * originalLeftPadding;
     var newSize = fullSize * (7 / 6);
@@ -24,26 +24,26 @@ function contractAndExpandContainer(changeContentCallback) {
     var newBorderRadius = newSize / 2 + "px";
     var newPadding = (newSize - originalHeight) / 2 + "px " + (newSize - originalWidth) / 2 + "px";
 
-    $("#container").removeClass("overflow");
+    $("#main").css("overflow", "hidden");
 
-    $("#container").animate({
+    $("#main").animate({
         borderRadius: newBorderRadius,
         padding: newPadding
     }, 100, function() {
-        $("#container").animate({
+        $("#main").animate({
             width: "0",
             height: "0",
             padding: "0"
         }, 300, function() {
             setTimeout(function() {
                 changeContentCallback();
-                $("#container").animate({
+                $("#main").animate({
                     height: originalHeight,
                     padding: newPadding,
                     width: originalWidth
                 }, 300, function() {
-                    $("#container").addClass("overflow");
-                    $("#container").animate({
+                    $("#main").css("overflow", "visible");
+                    $("#main").animate({
                         borderRadius: originalBorderRadius,
                         padding: originalPadding
                     }, 100);
@@ -57,10 +57,9 @@ function updateContainerContent() {
     var currentPage = levels[level].rounds[round].pages[page];
 
     if (currentPage != null && currentPage.type == "question") {
-        $("#container").removeClass();
-        $("#container").addClass("lesson");
-        $("#container").addClass("overflow");
-        $("#answer").addClass("hidden");
+        $("#content").removeClass();
+        $("#content").addClass("lesson");
+        $("#main").css("overflow", "visible");
     }
 
     if (page + 1 == levels[level].rounds[round].pages.length) {
@@ -74,36 +73,35 @@ function updateContainerContent() {
 
             contractAndExpandContainer(function() {
                 if (level == 1) {
-                    $("#stage").removeClass("hidden");
-                    $("#container").addClass("lesson");
-                    $("#container a").text("Continue");
-                    $("#container .stage").removeClass("hidden");
+                    $("#indicator").removeClass("hidden");
+                    $("#content").addClass("lesson");
+                    $("#main a").text("Continue");
                 }
 
-                $("#container .stage").removeClass("round");
-                $("#container .stage").addClass("level");
-                $("#container .stage").text(level);
-                $(".level").text(level);
+                $("#main .indicator").removeClass("round");
+                $("#main .indicator").addClass("level");
+                $("#main .indicator").text(level);
+                $(".level.update").text(level);
 
-                $("#container h1").html("Level " + numbers[level] + ":<br><strong>" + levels[level].name + "</strong>");
-                $("#container p").text(levels[level].description);
+                $("#main h1").html("Level " + numbers[level] + ":<br><strong>" + levels[level].name + "</strong>");
+                $("#main p").text(levels[level].description);
 
-                $("#container h1").removeClass("hidden");
+                $("#main h1").removeClass("hidden");
             });
         } else {
             // Round is complete
             round += 1;
 
             contractAndExpandContainer(function() {
-                $("#container .stage").removeClass("level");
-                $("#container .stage").addClass("round");
-                $("#container .stage").text(round);
-                $(".round").text(round);
+                $("#main .indicator").removeClass("level");
+                $("#main .indicator").addClass("round");
+                $("#main .indicator").text(round);
+                $(".round.update").text(round);
 
-                $("#container h1").html("Round " + numbers[round] + ":<br><strong>" + levels[level].rounds[round].name + "</strong>");
+                $("#main h1").html("Round " + numbers[round] + ":<br><strong>" + levels[level].rounds[round].name + "</strong>");
 
-                $("#container h1").removeClass("hidden");
-                $("#container p").addClass("hidden");
+                $("#main h1").removeClass("hidden");
+                $("#main p").addClass("hidden");
             });
         }
     } else {
@@ -113,30 +111,29 @@ function updateContainerContent() {
         var content = levels[level].rounds[round].pages[page];
 
         if (content.type == "text") {
-            $("#container p").text(content.text);
+            $("#main p").text(content.text);
         } else if (content.type == "question") {
-            $("#container p").html(content.code);
+            $("#main p").html(content.code);
 
-            $("#container").removeClass();
-            $("#container").addClass("question")
-            $("#answer").removeClass("hidden");
+            $("#content").removeClass("lesson");
+            $("#content").addClass("question");
         }
 
-        $("#container h1").addClass("hidden");
-        $("#container p").removeClass("hidden");
+        $("#main h1").addClass("hidden");
+        $("#main p").removeClass("hidden")
     }
 }
 
-$("#begin").click(function() {
+$("#main .button").click(function() {
     updateContainerContent();
 });
 
-$("#stage").click(function() {
-    $("#level-selector").removeClass("hidden");
+$("#indicator").click(function() {
+    $("#map").removeClass("hidden");
 });
 
 $("#close-button").click(function() {
-    $("#level-selector").addClass("hidden");
+    $("#map").addClass("hidden");
 });
 
 $("#answer input").keyup(function(e) {

@@ -18,7 +18,8 @@ body {
     display: none !important;
 }
 
-#stage {
+#indicator {
+    cursor: pointer;
     top: 32px;
     right: 32px;
     position: absolute;
@@ -36,7 +37,11 @@ body {
     background: #f44336;
 }
 
-#stage .level, #stage .round {
+.round {
+    background: #3f51b5;
+}
+
+#indicator .level, #indicator .round {
     border-radius: 28px;
     display: inline-block;
     font-size: 28px;
@@ -45,32 +50,31 @@ body {
     width: 56px;
 }
 
-#stage .level {
+#indicator .level {
     margin-right: 24px;
 }
 
-.round {
-    background: #3f51b5;
-}
-
-#container {
+.bubble {
     background: #fff;
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: calc(448px - 96px * 2);
-    height: calc(448px - 60px * 2);
-    border-radius: calc(448px / 2);
     overflow: hidden;
-    padding: 60px 96px;
     position: absolute;
-    top: 45%;
-    left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
 }
 
-#container .stage {
+#main {
+    width: calc(448px - 96px * 2);
+    height: calc(448px - 60px * 2);
+    border-radius: calc(448px / 2);
+    padding: 60px 96px;
+    top: 45%;
+    left: 50%;
+}
+
+#main .indicator {
     transform: translate(-50%, -50%);
     position: absolute;
     top: 15%;
@@ -82,38 +86,46 @@ body {
     font-size: 36px;
 }
 
-#container h1 {
+#main h1 {
     margin-top: 32px;
     font-size: 32px;
     font-weight: 700;
 }
 
-#container p {
+#main p {
     margin-top: 24px;
     font-size: 18px;
 }
 
-#container.lesson {
+#main .button {
+    margin-top: 32px;
+}
+
+.lesson #main {
     text-align: left;
 }
 
-#container.lesson h1 {
+.lesson #main h1 {
     font-size: 42px;
     font-weight: 400;
     margin-top: 0;
 }
 
-#container.lesson h1 strong {
+.lesson #main h1 strong {
     font-weight: 900;
 }
 
-#container.lesson p {
+.lesson #main p {
     font-size: 26px;
     line-height: 42px;
     margin-right: -256px;
 }
 
-#container.lesson .button {
+.lesson #main .indicator {
+    display: block !important;
+}
+
+.lesson #main .button {
     background: rgba(63, 81, 181, 0.1);
     top: 81%;
     left: 81%;
@@ -121,11 +133,11 @@ body {
     transform: translate(-50%, -50%);
 }
 
-#container.lesson .button:hover {
+.lesson #main .button:hover {
     background: #3f51b5;
 }
 
-#container.question {
+.question #main {
     top: 35%;
     left: 40%;
     width: calc(448px - 32px * 2) !important;
@@ -133,28 +145,27 @@ body {
     padding: 32px !important;
 }
 
-#container.question p {
+.question #answer {
+    display: flex;
+}
+
+.question #main p {
     font-size: 32px;
 }
 
-#container.question .stage, #container.question .button {
+.question #main .indicator, .question #main .button {
     display: none;
 }
 
 #answer {
-    background: #fff;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    display: none;
     width: calc(192px - 16px * 2);
     height: calc(192px - 16px * 2);
     border-radius: calc(192px / 2);
     padding: 16px;
-    position: absolute;
     top: 65%;
     left: 60%;
-    transform: translate(-50%, -50%);
-    text-align: center;
+    overflow: visible;
 }
 
 #answer p {
@@ -197,10 +208,6 @@ body {
     background: #3f51b5;
 }
 
-#container.overflow {
-    overflow: visible;
-}
-
 .button {
     border: #3f51b5 2px solid;
     border-radius: 4px;
@@ -218,11 +225,7 @@ body {
     color: #fff;
 }
 
-#begin {
-    margin-top: 32px;
-}
-
-#level-selector {
+#map {
     background: #f8f3e7;
     position: absolute;
     top: 0;
@@ -231,7 +234,7 @@ body {
     bottom: 0;
 }
 
-#level-selector #close-button {
+#close-button {
     width: 48px;
     height: 48px;
     position: absolute;
@@ -240,18 +243,18 @@ body {
     cursor: pointer;
 }
 
-#level-selector #close-button img {
+#close-button img {
     width: 100%;
     height: 100%;
 }
 
-#level-selector .level-content {
+.map-level {
     width: 30%;
     display: inline-block;
     vertical-align: top;
 }
 
-#level-selector .level-content .name {
+.map-level .name {
     font-size: 28px;
     font-weight: 700;
     line-height: 42px;
@@ -259,7 +262,7 @@ body {
     margin-top: 5vh;
 }
 
-#level-selector .level-content .level {
+.map-level .level {
     display: inline-block;
     margin-right: 16px;
     width: 42px;
@@ -268,20 +271,20 @@ body {
     font-size: 24px;
 }
 
-.level-content ul {
+.map-level ul {
     margin-top: 18px;
     margin-left: calc(25% + 24px);
     list-style-type: none;
 }
 
-.level-content li {
+.map-level li {
     text-align: left;
     line-height: 32px;
     margin-bottom: 12px;
     font-size: 20px;
 }
 
-.level-content li .round {
+.map-level li .round {
     display: inline-block;
     margin-right: 10px;
     width: 32px;
@@ -290,7 +293,7 @@ body {
     font-size: 18px;
 }
 
-#level-selector .level-content .round-name {
+.map-level .round-name {
     font-size: 20px;
     font-weight: 400;
     margin-top: 16px;
