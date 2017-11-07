@@ -1,0 +1,8 @@
+# macOS
+.DS_Store
+
+# Bundler
+Gemfile.lock
+
+# Jekyll
+_site
