@@ -22,7 +22,10 @@ $("#begin").click(function() {
             height: "0",
             padding: "0"
         }, 300, function() {
-            $("#container h1").text("Testing");
+            $("#container").addClass("lesson");
+            $("#container h1").html("Level One:<br><strong>Basics</strong>");
+            $("#container p").text("Let's start with the basics...");
+            $("#container a").text("Continue");
 
             setTimeout(function() {
                 $("#container").animate({
@@ -30,6 +33,7 @@ $("#begin").click(function() {
                     padding: newPadding,
                     width: originalWidth
                 }, 300, function() {
+                    $("#container").addClass("overflow");
                     $("#container").animate({
                         borderRadius: originalBorderRadius,
                         padding: originalPadding
