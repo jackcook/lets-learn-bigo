@@ -53,8 +53,8 @@ function contractAndExpandContainer(changeContentCallback) {
             height: "0",
             padding: "0"
         }, 300, function() {
-            changeContentCallback();
             setTimeout(function() {
+                changeContentCallback();
                 $("#container").animate({
                     height: originalHeight,
                     padding: newPadding,
@@ -72,6 +72,7 @@ function contractAndExpandContainer(changeContentCallback) {
 }
 
 function updateContainerContent(page) {
+    $("#container .level").removeClass("hidden");
     $("#container h1").html("title" in page ? page.title : "");
     $("#container p").text("text" in page ? page.text : "");
 }
@@ -79,6 +80,7 @@ function updateContainerContent(page) {
 $("#begin").click(function() {
     if (page == 0) {
         contractAndExpandContainer(function() {
+            $("#stage").removeClass("hidden");
             $("#container").addClass("lesson");
             $("#container a").text("Continue");
             updateContainerContent(content[page]);

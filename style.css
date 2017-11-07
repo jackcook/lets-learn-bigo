@@ -14,12 +14,16 @@ body {
     position: relative;
 }
 
+.hidden {
+    display: none;
+}
+
 #stage {
     top: 32px;
     right: 32px;
     position: absolute;
     font-size: 24px;
-    line-height: 64px;
+    line-height: 56px;
 }
 
 .level, .round {
@@ -33,12 +37,12 @@ body {
 }
 
 #stage .level, #stage .round {
-    border-radius: 32px;
+    border-radius: 28px;
     display: inline-block;
-    font-size: 32px;
-    height: 64px;
+    font-size: 28px;
+    height: 56px;
     margin-left: 8px;
-    width: 64px;
+    width: 56px;
 }
 
 #stage .level {
@@ -57,7 +61,7 @@ body {
     width: calc(448px - 96px * 2);
     height: calc(448px - 60px * 2);
     border-radius: calc(448px / 2);
-    /*overflow: hidden;*/
+    overflow: hidden;
     padding: 60px 96px;
     position: absolute;
     top: 45%;
@@ -71,11 +75,11 @@ body {
     position: absolute;
     top: 15%;
     left: 15%;
-    width: 84px;
-    height: 84px;
-    line-height: 84px;
-    border-radius: 42px;
-    font-size: 42px;
+    width: 72px;
+    height: 72px;
+    line-height: 72px;
+    border-radius: 36px;
+    font-size: 36px;
 }
 
 #container h1 {
