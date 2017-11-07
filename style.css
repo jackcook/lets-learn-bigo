@@ -16,11 +16,11 @@ body {
 
 #container {
     background: #fff;
-    width: calc(384px - 64px * 2);
-    height: calc(384px - 36px * 2);
-    border-radius: calc(384px / 2);
+    width: calc(448px - 96px * 2);
+    height: calc(448px - 60px * 2);
+    border-radius: calc(448px / 2);
     overflow: hidden;
-    padding: 36px 64px;
+    padding: 60px 96px;
     position: absolute;
     top: 45%;
     left: 50%;
@@ -35,7 +35,7 @@ body {
 
 #container p {
     margin-top: 24px;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 .button {
@@ -44,7 +44,7 @@ body {
     color: #3f51b5;
     cursor: pointer;
     display: table;
-    font-size: 18px;
+    font-size: 20px;
     margin: 0 auto;
     padding: 8px 16px;
     transition: 0.25s ease all;

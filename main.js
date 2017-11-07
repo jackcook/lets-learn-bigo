@@ -22,6 +22,8 @@ $("#begin").click(function() {
             height: "0",
             padding: "0"
         }, 300, function() {
+            $("#container h1").text("Testing");
+
             setTimeout(function() {
                 $("#container").animate({
                     height: originalHeight,
