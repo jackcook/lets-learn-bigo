@@ -1,4 +1,17 @@
-$("#begin").click(function() {
+var level = 0;
+var page = 0;
+
+var content = [
+    {
+        title: "Level One:<br><strong>Basics</strong>",
+        text: "Let's start with the basics..."
+    },
+    {
+        text: "Big O notation is used to determine the running times of algorithms in computer science."
+    }
+];
+
+function contractAndExpandContainer(changeContentCallback) {
     var originalHeight = parseInt($("#container").css("height"));
     var originalWidth = parseInt($("#container").css("width"));
     var originalLeftPadding = parseInt($("#container").css("padding-left"));
@@ -22,11 +35,7 @@ $("#begin").click(function() {
             height: "0",
             padding: "0"
         }, 300, function() {
-            $("#container").addClass("lesson");
-            $("#container h1").html("Level One:<br><strong>Basics</strong>");
-            $("#container p").text("Let's start with the basics...");
-            $("#container a").text("Continue");
-
+            changeContentCallback();
             setTimeout(function() {
                 $("#container").animate({
                     height: originalHeight,
@@ -42,4 +51,23 @@ $("#begin").click(function() {
             }, 500);
         });
     });
+}
+
+function updateContainerContent(page) {
+    $("#container h1").html("title" in page ? page.title : "");
+    $("#container p").text("text" in page ? page.text : "");
+}
+
+$("#begin").click(function() {
+    if (page == 0) {
+        contractAndExpandContainer(function() {
+            $("#container").addClass("lesson");
+            $("#container a").text("Continue");
+            updateContainerContent(content[page]);
+            page += 1;
+        });
+    } else {
+        updateContainerContent(content[page]);
+        page += 1;
+    }
 });

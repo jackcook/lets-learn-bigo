@@ -57,8 +57,9 @@ body {
 }
 
 #container.lesson p {
-    font-size: 24px;
-    margin-right: -384px;
+    font-size: 26px;
+    line-height: 42px;
+    margin-right: -256px;
 }
 
 #container.lesson .button {
