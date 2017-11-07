@@ -14,6 +14,41 @@ body {
     position: relative;
 }
 
+#stage {
+    top: 32px;
+    right: 32px;
+    position: absolute;
+    font-size: 24px;
+    line-height: 64px;
+}
+
+.level, .round {
+    text-align: center;
+    font-weight: 700;
+    color: #fff;
+}
+
+.level {
+    background: #f44336;
+}
+
+#stage .level, #stage .round {
+    border-radius: 32px;
+    display: inline-block;
+    font-size: 32px;
+    height: 64px;
+    margin-left: 8px;
+    width: 64px;
+}
+
+#stage .level {
+    margin-right: 24px;
+}
+
+.round {
+    background: #3f51b5;
+}
+
 #container {
     background: #fff;
     display: flex;
@@ -22,13 +57,25 @@ body {
     width: calc(448px - 96px * 2);
     height: calc(448px - 60px * 2);
     border-radius: calc(448px / 2);
-    overflow: hidden;
+    /*overflow: hidden;*/
     padding: 60px 96px;
     position: absolute;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+}
+
+#container .level {
+    transform: translate(-50%, -50%);
+    position: absolute;
+    top: 15%;
+    left: 15%;
+    width: 84px;
+    height: 84px;
+    line-height: 84px;
+    border-radius: 42px;
+    font-size: 42px;
 }
 
 #container h1 {
