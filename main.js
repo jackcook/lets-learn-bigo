@@ -109,18 +109,23 @@ function updateContainerContent() {
         page += 1;
 
         var content = levels[level].rounds[round].pages[page];
+        $("#content").removeClass();
 
         if (content.type == "text") {
             $("#main p").text(content.text);
+            $("#content").addClass("lesson");
+
+            $("#main h1").addClass("hidden");
+            $("#main p").removeClass("hidden");
         } else if (content.type == "question") {
             $("#main p").html(content.code);
-
-            $("#content").removeClass("lesson");
             $("#content").addClass("question");
+        } else if (content.type == "recap") {
+            $("#content").addClass("lesson");
+            $("#main h1").removeClass("hidden");
+            $("#main h1").text("Round Complete!");
+            $("#main p").text("You now know how to determine constant running time!");
         }
-
-        $("#main h1").addClass("hidden");
-        $("#main p").removeClass("hidden")
     }
 }
 
@@ -152,5 +157,11 @@ $("#answer input").keyup(function(e) {
 });
 
 $("#answer .button").click(function() {
+    $("#answer input").val("");
+    $("#answer input").removeClass("correct");
+    $("#answer input").prop("disabled", false);
+    $("#answer p").text("TIME COMPLEXITY");
+    $("#answer .button").addClass("hidden");
+
     updateContainerContent();
 });
