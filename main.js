@@ -37,15 +37,15 @@ var content = [
         rounds: [
             {
                 pages: [
-                    "Level 2 round 1 page 1",
-                    "Level 2 round 1 page 2"
+                    "Level 2 introduction page 1",
+                    "Level 2 introduction page 2"
                 ],
             },
             {
                 name: "Constant Runtime 2",
                 pages: [
-                    "Level 2 round 2 page 1",
-                    "Level 2 round 2 page 2"
+                    "Level 2 round 1 page 1",
+                    "Level 2 round 1 page 2"
                 ]
             }
         ]
@@ -111,8 +111,13 @@ function updateContainerContent(firstLevel) {
                     $("#stage").removeClass("hidden");
                     $("#container").addClass("lesson");
                     $("#container a").text("Continue");
-                    $("#container .level").removeClass("hidden");
+                    $("#container .stage").removeClass("hidden");
                 }
+
+                $("#container .stage").removeClass("round");
+                $("#container .stage").addClass("level");
+                $("#container .stage").text(level);
+                $(".level").text(level);
 
                 $("#container h1").html("Level One:<br><strong>" + content[level].name + "</strong>");
                 $("#container p").text(content[level].description);
@@ -122,6 +127,11 @@ function updateContainerContent(firstLevel) {
             round += 1;
 
             contractAndExpandContainer(function() {
+                $("#container .stage").removeClass("level");
+                $("#container .stage").addClass("round");
+                $("#container .stage").text(round);
+                $(".round").text(round);
+
                 $("#container h1").html("Round One:<br><strong>" + content[level].rounds[round].name + "</strong>");
                 $("#container p").text("");
             });
