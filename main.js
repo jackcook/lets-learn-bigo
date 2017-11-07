@@ -154,3 +154,11 @@ function updateContainerContent() {
 $("#begin").click(function() {
     updateContainerContent();
 });
+
+$("#stage").click(function() {
+    $("#level-selector").removeClass("hidden");
+});
+
+$("#close-button").click(function() {
+    $("#level-selector").addClass("hidden");
+});

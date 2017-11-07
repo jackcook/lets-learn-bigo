@@ -149,3 +149,77 @@ body {
 #begin {
     margin-top: 32px;
 }
+
+#level-selector {
+    background: #f8f3e7;
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+}
+
+#level-selector #close-button {
+    width: 48px;
+    height: 48px;
+    position: absolute;
+    top: 32px;
+    right: 32px;
+    cursor: pointer;
+}
+
+#level-selector #close-button img {
+    width: 100%;
+    height: 100%;
+}
+
+#level-selector .level-content {
+    width: 30%;
+    display: inline-block;
+    vertical-align: top;
+}
+
+#level-selector .level-content .name {
+    font-size: 28px;
+    font-weight: 700;
+    line-height: 42px;
+    margin-left: 25%;
+    margin-top: 5vh;
+}
+
+#level-selector .level-content .level {
+    display: inline-block;
+    margin-right: 16px;
+    width: 42px;
+    height: 42px;
+    border-radius: 21px;
+    font-size: 24px;
+}
+
+.level-content ul {
+    margin-top: 18px;
+    margin-left: calc(25% + 24px);
+    list-style-type: none;
+}
+
+.level-content li {
+    text-align: left;
+    line-height: 32px;
+    margin-bottom: 12px;
+    font-size: 20px;
+}
+
+.level-content li .round {
+    display: inline-block;
+    margin-right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 16px;
+    font-size: 18px;
+}
+
+#level-selector .level-content .round-name {
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 16px;
+}
