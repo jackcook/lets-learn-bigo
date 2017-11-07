@@ -8,6 +8,24 @@ var content = [
     },
     {
         text: "Big O notation is used to determine the running times of algorithms in computer science."
+    },
+    {
+        text: "Constant runtime exists when how long the algorithm takes is unaffected by the inputs."
+    },
+    {
+        text: "For example, determining whether a boolean is true or false will always take the same amount of time."
+    },
+    {
+        text: "Because of this, the runtime of that algorithm could be represented as O(1), meaning it is constant."
+    },
+    {
+        text: "If the runtime of an algorithm increased by the same amount for each increase in the number of inputs, that would be referred to as linear time."
+    },
+    {
+        text: "For example, if we were adding together a list of numbers, exactly one additional operation has to be made for each one addition to the list. This results in a linear relationship."
+    },
+    {
+        text: "Since it is linear, it increases by the same amount for each increase in n. Therefore, we can refer to this as O(n)."
     }
 ];
 
